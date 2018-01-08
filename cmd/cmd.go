@@ -10,6 +10,8 @@ import (
 
 	"github.com/kisielk/gotool"
 	"golang.org/x/tools/go/loader"
+
+	"github.com/joshdk/callcheck/graph"
 )
 
 func Cmd(args []string) error {
@@ -29,8 +31,16 @@ func Cmd(args []string) error {
 		return err
 	}
 
-	for _, pkgInfo := range program.AllPackages {
-		fmt.Println(pkgInfo.Pkg.Path())
+	decls, err := graph.Program(program)
+	if err != nil {
+		return err
+	}
+
+	for decl, calls := range decls {
+		fmt.Printf("%s | %s\n", decl.Position, decl.Name)
+		for _, call := range calls {
+			fmt.Printf(" └─ %s | %s\n", call.Position, call.Name)
+		}
 	}
 
 	return nil
