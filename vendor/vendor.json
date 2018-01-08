@@ -1,0 +1,37 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "/OoEj0wxK7Rd25jAlZv1xi+e9wg=",
+			"path": "github.com/kisielk/gotool",
+			"revision": "d6ce6262d87e3a4e153e86023ff56ae771554a41",
+			"revisionTime": "2017-08-28T04:23:10Z"
+		},
+		{
+			"checksumSHA1": "9jyCVFMF5GDl15Vqp2ZxRmmNftE=",
+			"path": "github.com/kisielk/gotool/internal/load",
+			"revision": "d6ce6262d87e3a4e153e86023ff56ae771554a41",
+			"revisionTime": "2017-08-28T04:23:10Z"
+		},
+		{
+			"checksumSHA1": "AsL/fTkY1p1HNVSikhVZJd++Nrk=",
+			"path": "golang.org/x/tools/go/ast/astutil",
+			"revision": "f271d7a0f8cf389f3ee4f6bf8d68e716a60ea571",
+			"revisionTime": "2017-12-28T01:47:17Z"
+		},
+		{
+			"checksumSHA1": "AnXFEvmaJ7w2Q7hWPcLUmCbPgq0=",
+			"path": "golang.org/x/tools/go/buildutil",
+			"revision": "f271d7a0f8cf389f3ee4f6bf8d68e716a60ea571",
+			"revisionTime": "2017-12-28T01:47:17Z"
+		},
+		{
+			"checksumSHA1": "ZpAR2KupZto/mWf9zu5e6IKDWt0=",
+			"path": "golang.org/x/tools/go/loader",
+			"revision": "f271d7a0f8cf389f3ee4f6bf8d68e716a60ea571",
+			"revisionTime": "2017-12-28T01:47:17Z"
+		}
+	],
+	"rootPath": "github.com/joshdk/callcheck"
+}
