@@ -36,9 +36,9 @@ func Cmd(args []string) error {
 		return err
 	}
 
-	for decl, calls := range decls {
+	for _, decl := range decls {
 		fmt.Printf("%s | %s\n", decl.Position, decl.Name)
-		for _, call := range calls {
+		for _, call := range decl.Calls {
 			fmt.Printf(" └─ %s | %s\n", call.Position, call.Name)
 		}
 	}

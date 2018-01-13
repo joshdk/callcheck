@@ -14,8 +14,8 @@ import (
 type funcDeclVisitor struct {
 	pkg     *loader.PackageInfo
 	fset    *token.FileSet
-	current FuncDecl
-	decls   map[FuncDecl][]FuncCall
+	current string
+	decls   map[string]FuncDecl
 }
 
 // Visit is intended to traverses the contents of an ast.FuncDecl, and will
@@ -47,5 +47,7 @@ func (v *funcDeclVisitor) Visit(node ast.Node) ast.Visitor {
 }
 
 func (v *funcDeclVisitor) add(call FuncCall) {
-	v.decls[v.current] = append(v.decls[v.current], call)
+	curr := v.decls[v.current]
+	curr.Calls = append(curr.Calls, call)
+	v.decls[v.current] = curr
 }
