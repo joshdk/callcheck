@@ -14,6 +14,7 @@ type FuncDecl struct {
 	Name     string
 	Package  string
 	Position string
+	Calls    []FuncCall
 }
 
 type FuncCall struct {
@@ -22,8 +23,8 @@ type FuncCall struct {
 	Position string
 }
 
-func Program(program *loader.Program) (map[FuncDecl][]FuncCall, error) {
-	decls := make(map[FuncDecl][]FuncCall)
+func Program(program *loader.Program) (map[string]FuncDecl, error) {
+	decls := make(map[string]FuncDecl)
 
 	// Check every package that belongs to the program.
 	for _, pkgInfo := range program.AllPackages {
@@ -42,14 +43,17 @@ func Program(program *loader.Program) (map[FuncDecl][]FuncCall, error) {
 					continue
 				}
 
+				decls[name] = FuncDecl{
+					Name:     name,
+					Package:  pkgName,
+					Position: program.Fset.Position(fn.Pos()).String(),
+					Calls:    []FuncCall{},
+				}
+
 				vis := funcDeclVisitor{
 					pkgInfo,
 					program.Fset,
-					FuncDecl{
-						Name:     name,
-						Package:  pkgName,
-						Position: program.Fset.Position(fn.Pos()).String(),
-					},
+					name,
 					decls,
 				}
 
