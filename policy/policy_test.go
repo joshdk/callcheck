@@ -273,6 +273,8 @@ func TestMatch(t *testing.T) {
 							Name: "main",
 							Calls: []graph.FuncCall{
 								{Name: "parse"},
+
+								{Name: "panic"},
 							},
 						},
 						"parse": {
@@ -399,8 +401,8 @@ func TestMatch(t *testing.T) {
 			name := fmt.Sprintf("%s #%d > %s #%d", suite.name, suiteIndex, test.name, testIndex)
 
 			t.Run(name, func(t *testing.T) {
-				matched := IsForbidden(suite.policy, test.root, test.graph)
-				assert.Equal(t, test.matches, matched)
+				paths := MatchingPaths(test.graph, suite.policy)
+				assert.Equal(t, test.matches, len(paths) == 1)
 			})
 		}
 	}

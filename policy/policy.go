@@ -11,22 +11,6 @@ type Policy struct {
 }
 
 type Node struct {
-	Name    string  `yaml:"name"`
-	Calls   []*Node `yaml:"calls"`
-	Visited map[string]struct{}
-}
-
-// initRule resets a node's (and all sub-calls') visited status recursively.
-func initRule(node *Node) {
-	if node == nil {
-		return
-	}
-
-	node.Visited = make(map[string]struct{})
-
-	for _, call := range node.Calls {
-		if call != nil {
-			initRule(call)
-		}
-	}
+	Name  string  `yaml:"name"`
+	Calls []*Node `yaml:"calls"`
 }
