@@ -5,6 +5,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/joshdk/callcheck/cmd"
@@ -13,6 +14,7 @@ import (
 func main() {
 	err := cmd.Cmd(os.Args[1:])
 	if err != nil {
+		fmt.Fprintf(os.Stderr, "callcheck: %s\n", err.Error())
 		os.Exit(1)
 	}
 }

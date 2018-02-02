@@ -5,24 +5,33 @@
 package cmd
 
 import (
-	"fmt"
+	"errors"
 	"go/build"
 
 	"github.com/kisielk/gotool"
 	"golang.org/x/tools/go/loader"
 
+	"github.com/joshdk/callcheck/config"
 	"github.com/joshdk/callcheck/graph"
 )
 
 func Cmd(args []string) error {
+	if len(args) == 0 {
+		args = []string{"./..."}
+	}
+
+	checkCfg, err := config.Load()
+	if err != nil {
+		return err
+	}
+
 	paths := gotool.ImportPaths(args)
 
 	cfg := loader.Config{
 		Build: &build.Default,
 	}
 
-	_, err := cfg.FromArgs(paths, false)
-	if err != nil {
+	if _, err := cfg.FromArgs(paths, false); err != nil {
 		return err
 	}
 
@@ -36,11 +45,8 @@ func Cmd(args []string) error {
 		return err
 	}
 
-	for _, decl := range decls {
-		fmt.Printf("%s | %s\n", decl.Position, decl.Name)
-		for _, call := range decl.Calls {
-			fmt.Printf(" └─ %s | %s\n", call.Position, call.Name)
-		}
+	if violations(decls, checkCfg) {
+		return errors.New("policy violations found")
 	}
 
 	return nil
