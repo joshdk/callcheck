@@ -34,8 +34,8 @@ func (decl Decl) String() string {
 
 func (decl Decl) string(prefix string) [][2]string {
 	results := [][2]string{{
-		decl.Position,
-		prefix + decl.Name,
+		fmtUnknown(decl.Position),
+		prefix + fmtUnknown(decl.Name),
 	}}
 
 	for index, call := range decl.Calls {
@@ -47,12 +47,19 @@ func (decl Decl) string(prefix string) [][2]string {
 		}
 
 		results = append(results, [2]string{
-			call.Position,
-			prefix + suffix + call.Name,
+			fmtUnknown(call.Position),
+			prefix + suffix + fmtUnknown(call.Name),
 		})
 
 		results = append(results, call.Decl.string(prefix+runner)...)
 	}
 
 	return results
+}
+
+func fmtUnknown(name string) string {
+	if name == "" {
+		return "???"
+	}
+	return name
 }
