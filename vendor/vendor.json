@@ -57,6 +57,12 @@
 			"path": "golang.org/x/tools/go/loader",
 			"revision": "f271d7a0f8cf389f3ee4f6bf8d68e716a60ea571",
 			"revisionTime": "2017-12-28T01:47:17Z"
+		},
+		{
+			"checksumSHA1": "qOmvuDm+F+2nQQecUZBVkZrTn6Y=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "d670f9405373e636a5a2765eea47fac0c9bc91a4",
+			"revisionTime": "2018-01-09T11:43:31Z"
 		}
 	],
 	"rootPath": "github.com/joshdk/callcheck"
